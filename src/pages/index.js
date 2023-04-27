@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import LeandingPage from "@/components/leandingPage";
+import LeandingPage from "@/components/Footer";
 import Head from "next/head";
 
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
           href={require("../icons/logo-color.png").default.src}
         />
       </Head>
+      {/* here im using a svg  */}
       <main>
         <Header />
         <LeandingPage />
