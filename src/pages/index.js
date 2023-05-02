@@ -1,8 +1,15 @@
 import Header from "@/components/header";
-import LeandingPage from "@/components/Footer";
 import Head from "next/head";
+import { useState } from "react";
+import Footer from "@/components/Footer";
+import { CloseModal } from "@/icons/social.js";
+import Modal from "@/components/modal";
 
-export default function Home() {
+function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <Head>
@@ -14,11 +21,14 @@ export default function Home() {
           href={require("../icons/logo-color.png").default.src}
         />
       </Head>
-      {/* here im using a svg  */}
+
       <main>
         <Header />
-        <LeandingPage />
+        <Modal />
+        <Footer />
       </main>
     </>
   );
 }
+
+export default Home;
