@@ -2,9 +2,24 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 import SignupModal from "./signupModal";
 import { CloseModal } from "@/icons/social";
+import { auth } from "../config/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  const signIn = async (e) => {
+    try {
+      e.preventDefault();
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log(auth, email, password);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -95,7 +110,9 @@ const Header = () => {
               Gmail:
             </label>
             <input
+              onChange={(e) => setemail(e.target.value)}
               className="text-[white] pl-[20px] bg-[#958888b2] rounded-[10px] mt-[10px] h-[30px]"
+              defaultValue={email}
               type="email"
               id="first"
               name="first"
@@ -107,6 +124,9 @@ const Header = () => {
               Password:
             </label>
             <input
+              // on changi gaukete
+              onChange={(e) => setpassword(e.target.value)}
+              defaultValue={password}
               className="text-[white] pl-[20px] bg-[#958888b2] rounded-[10px] mt-[10px] h-[30px]"
               type="password"
               id="last"
@@ -118,6 +138,7 @@ const Header = () => {
             />
             <div className="flex justify-center">
               <button
+                onClick={signIn}
                 className="flex justify-center bg-red-500 hover:bg-red-400 w-[200px] h-[30px] mt-[15px] rounded-[50px]"
                 type="submit"
               >
